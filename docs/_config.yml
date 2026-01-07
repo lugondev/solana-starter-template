@@ -18,7 +18,7 @@ search:
 
 # Aux links (top right)
 aux_links:
-  "View on GitHub": https://github.com/your-username/solana-starter-program
+  "View on GitHub": https://github.com/lugondev/solana-starter-program
 
 aux_links_new_tab: true
 
@@ -72,7 +72,7 @@ kramdown:
     block:
       line_numbers: false
 
-# Plugins
 plugins:
+  - jekyll-remote-theme
   - jekyll-seo-tag
   - jekyll-sitemap
