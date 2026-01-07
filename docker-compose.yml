@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: solana-indexer-db
+    environment:
+      POSTGRES_DB: solana_indexer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./go_indexer/migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - solana-network
+
+  indexer:
+    build:
+      context: ./go_indexer
+      dockerfile: Dockerfile
+    container_name: solana-indexer
+    environment:
+      SOLANA_RPC_URL: ${SOLANA_RPC_URL:-http://host.docker.internal:8899}
+      SOLANA_WS_URL: ${SOLANA_WS_URL:-ws://host.docker.internal:8900}
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/solana_indexer?sslmode=disable
+      START_SLOT: ${START_SLOT:-0}
+      POLL_INTERVAL_MS: ${POLL_INTERVAL_MS:-1000}
+      BATCH_SIZE: ${BATCH_SIZE:-10}
+      MAX_CONCURRENCY: ${MAX_CONCURRENCY:-5}
+      SERVER_PORT: 8080
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - solana-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SOLANA_RPC_HOST: ${NEXT_PUBLIC_SOLANA_RPC_HOST:-http://localhost:8899}
+        NEXT_PUBLIC_SOLANA_NETWORK: ${NEXT_PUBLIC_SOLANA_NETWORK:-localnet}
+        NEXT_PUBLIC_STARTER_PROGRAM_ID: ${NEXT_PUBLIC_STARTER_PROGRAM_ID}
+        NEXT_PUBLIC_COUNTER_PROGRAM_ID: ${NEXT_PUBLIC_COUNTER_PROGRAM_ID}
+    container_name: solana-frontend
+    environment:
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - indexer
+    restart: unless-stopped
+    networks:
+      - solana-network
+
+networks:
+  solana-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local

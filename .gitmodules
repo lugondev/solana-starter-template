@@ -1,0 +1,11 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:lugondev/frontend-solana-starter.git
+
+[submodule "go_indexer"]
+	path = go_indexer
+	url = git@github.com:lugondev/go-indexer-solana-starter.git
+
+[submodule "starter_program"]
+	path = starter_program
+	url = git@github.com:lugondev/program-solana-starter.git

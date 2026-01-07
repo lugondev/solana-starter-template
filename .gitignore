@@ -1,0 +1,105 @@
+# ====================================
+# Solana Starter Program - Monorepo
+# ====================================
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# Editor Directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.vim/
+*.sublime-project
+*.sublime-workspace
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ====================================
+# Anchor / Rust Programs
+# ====================================
+starter_program/target/
+starter_program/.anchor/
+starter_program/test-ledger/
+starter_program/keypairs/
+starter_program/.DS_Store
+
+# ====================================
+# Next.js Frontend
+# ====================================
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/dist/
+frontend/node_modules/
+frontend/.turbo/
+frontend/coverage/
+
+# ====================================
+# Go Indexer
+# ====================================
+go_indexer/bin/
+go_indexer/indexer
+go_indexer/*.exe
+go_indexer/*.test
+go_indexer/*.out
+go_indexer/vendor/
+go_indexer/coverage.txt
+go_indexer/coverage.html
+
+# ====================================
+# Temporary Files
+# ====================================
+tmp/
+temp/
+*.tmp
+*.bak
+*.cache
+
+# ====================================
+# Documentation Build Artifacts
+# ====================================
+docs/_build/
+docs/.doctrees/
+
+# ====================================
+# Testing
+# ====================================
+.nyc_output/
+coverage/
+*.coverage
+htmlcov/
+
+# ====================================
+# Docker
+# ====================================
+docker-compose.override.yml
+
+# ====================================
+# Keep These Files
+# ====================================
+!starter_program/target/idl/*.json
+!starter_program/target/types/*.ts
