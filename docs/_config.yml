@@ -1,6 +1,6 @@
 title: Solana Starter Program
 description: A production-ready Solana development template featuring Anchor programs, TypeScript SDK, Next.js frontend, and high-performance Go indexer.
-remote_theme: just-the-docs/just-the-docs
+theme: just-the-docs
 
 url: https://lugondev.github.io
 baseurl: /solana-starter-program
@@ -42,6 +42,12 @@ external_links:
 # Navigation
 nav_sort: case_insensitive
 
+# Collections
+collections:
+  examples:
+    output: true
+    permalink: /examples/:name/
+
 # Code copy button
 enable_copy_code_button: true
 
@@ -73,7 +79,5 @@ kramdown:
       line_numbers: false
 
 plugins:
-  - jekyll-remote-theme
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-include-cache

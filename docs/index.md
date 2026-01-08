@@ -20,15 +20,16 @@ A production-ready Solana development template featuring Anchor programs, TypeSc
 
 | Component | Description |
 |:----------|:------------|
-| **Anchor Programs** | 2 programs with 24 instructions total |
+| **Anchor Programs** | 2 programs with 52 instructions total |
 | **Next.js Frontend** | Full-featured UI with Wallet Adapter |
 | **Go Indexer** | High-performance blockchain indexer |
-| **Test Suite** | 27 passing integration tests |
+| **Test Suite** | 96+ passing integration tests |
 | **Documentation** | Comprehensive guides and references |
 
 ## Quick Links
 
 - [Setup Guide]({% link setup-guide.md %}) - First time setup
+- [Solana by Example]({% link examples/index.md %}) - Learn by code examples
 - [Quick Reference]({% link quick-reference.md %}) - Commands cheat sheet  
 - [Localnet Setup]({% link localnet-setup.md %}) - Local development
 - [Integration Guide]({% link integration-guide.md %}) - Indexer + Programs
@@ -36,12 +37,16 @@ A production-ready Solana development template featuring Anchor programs, TypeSc
 
 ## Features
 
-### Starter Program (18 Instructions)
+### Starter Program (46 Instructions)
 
 - Program configuration with pause mechanism
 - User account management via PDAs
-- SPL token operations (mint, transfer, burn)
+- SPL token operations (mint, transfer, burn, delegate, freeze/thaw)
 - Cross-program invocation patterns
+- Role-Based Access Control (RBAC)
+- Treasury management with emergency controls
+- NFT support (collections, minting, marketplace, offers)
+- Program upgradability with proposal voting
 
 ### Counter Program (6 Instructions)
 

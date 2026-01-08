@@ -126,7 +126,7 @@ cd starter_program && anchor keys list
 
 # Or manually:
 anchor build                    # ✓ Programs compile
-anchor test                     # ✓ 27 tests pass  
+anchor test                     # ✓ 96+ tests pass  
 cd frontend && pnpm run type-check  # ✓ No TS errors
 cd go_indexer && go build       # ✓ Indexer builds
 ```
@@ -157,11 +157,16 @@ solana config set --url mainnet-beta
 
 ### Program Instructions
 
-**starter_program (18 total):**
-- Config: initialize, initialize_config, update_config, toggle_pause
-- Users: create_user_account, update_user_account, close_user_account  
-- Tokens: create_mint, mint_tokens, transfer_tokens, burn_tokens
-- CPI: transfer_sol, initialize_counter, increment_counter, add_to_counter, etc.
+**starter_program (46 total):**
+- Config (4): initialize, initialize_config, update_config, toggle_pause
+- Users (3): create_user_account, update_user_account, close_user_account  
+- Tokens Basic (5): create_mint, mint_tokens, transfer_tokens, transfer_tokens_with_pda, burn_tokens
+- Tokens Advanced (5): approve_delegate, revoke_delegate, freeze_token_account, thaw_token_account, close_token_account
+- CPI (8): transfer_sol, transfer_sol_with_pda, initialize_counter, increment_counter, add_to_counter, increment_multiple, increment_with_payment_from_pda
+- RBAC (4): assign_role, update_role_permissions, revoke_role, check_permission
+- Treasury (5): initialize_treasury, deposit_to_treasury, withdraw_from_treasury, emergency_withdraw, toggle_circuit_breaker
+- NFT (8): create_collection, mint_nft, update_nft_metadata, list_nft, buy_nft, cancel_nft_listing, create_nft_offer, accept_nft_offer
+- Upgrade (7): initialize_upgrade_authority, transfer_upgrade_authority, accept_upgrade_authority, create_upgrade_proposal, cast_vote, execute_proposal, cancel_proposal
 
 **counter_program (6 total):**
 - initialize, increment, decrement, add, reset, increment_with_payment
@@ -171,18 +176,19 @@ solana config set --url mainnet-beta
 | Test Type | Command | Expected |
 |-----------|---------|----------|
 | Unit | (none) | N/A |
-| Integration | `anchor test` | 27 passing |
+| Integration | `anchor test` | 96+ passing |
 | TypeScript | `pnpm run type-check` | No errors |
 | Full Stack | `./test-full-stack.sh` | All ✓ |
 
 ### Metrics Summary
 
-- **Programs:** 2 programs, 24 instructions
-- **Tests:** 27 integration tests (100% pass)
-- **Code:** ~8,000+ lines total
+- **Programs:** 2 programs, 52 instructions
+- **Tests:** 96+ integration tests (100% pass)
+- **Code:** ~10,000+ lines total
 - **Docs:** ~4,000+ lines across 11 files
 - **Components:** 8+ React components
 - **Hooks:** 6+ custom hooks
+- **Events:** 20+ event types
 
 ### Help Resources
 

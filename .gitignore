@@ -84,6 +84,11 @@ temp/
 # ====================================
 docs/_build/
 docs/.doctrees/
+docs/_site/
+docs/vendor/
+docs/.bundle/
+docs/Gemfile.lock
+docs/.jekyll-cache/
 
 # ====================================
 # Testing

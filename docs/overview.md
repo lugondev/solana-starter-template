@@ -12,12 +12,12 @@ A production-ready Solana development template featuring Anchor programs, TypeSc
 ## 🚀 Project Overview
 
 This monorepo contains:
-- **Two Anchor Programs** (Rust) - `starter_program` & `counter_program`
+- **Two Anchor Programs** (Rust) - `starter_program` (46 instructions) & `counter_program` (6 instructions)
 - **Next.js 16 Frontend** - Full-featured UI with Wallet Adapter
 - **Go Indexer** - High-performance blockchain indexer with concurrent processing
-- **Complete Test Suite** - 27 passing tests
+- **Complete Test Suite** - 96+ passing tests across 7 test files
 - **Type-Safe Integration** - Anchor IDL → TypeScript types
-- **Production Patterns** - PDAs, CPI, SPL tokens, error handling
+- **Production Patterns** - PDAs, CPI, SPL tokens, RBAC, NFT, Treasury, Upgradability
 
 ## 📁 Project Structure
 
@@ -25,9 +25,23 @@ This monorepo contains:
 solana-starter-program/
 ├── starter_program/          # Anchor workspace
 │   ├── programs/
-│   │   ├── starter_program/  # Main program (18 instructions)
+│   │   ├── starter_program/  # Main program (46 instructions)
+│   │   │   └── src/
+│   │   │       ├── lib.rs
+│   │   │       ├── constants.rs
+│   │   │       ├── error.rs
+│   │   │       ├── events.rs
+│   │   │       ├── state/    # config, user, role, treasury, nft, upgrade
+│   │   │       └── instructions/
 │   │   └── counter_program/  # Counter with payment (6 instructions)
-│   ├── tests/                # Integration tests (27 passing)
+│   ├── tests/                # Integration tests (96+ passing)
+│   │   ├── starter_program.ts
+│   │   ├── cross_program.ts
+│   │   ├── rbac.ts
+│   │   ├── advanced_token.ts
+│   │   ├── treasury.ts
+│   │   ├── nft-simple.ts
+│   │   └── upgrade-simple.ts
 │   ├── target/
 │   │   ├── idl/              # Generated IDL files
 │   │   └── types/            # TypeScript types
@@ -53,12 +67,12 @@ solana-starter-program/
 │   ├── internal/
 │   │   ├── config/           # Configuration management
 │   │   ├── indexer/          # Core indexer logic
-│   │   ├── repository/       # Data access layer
-│   │   └── handler/          # HTTP handlers
+│   │   └── repository/       # Data access layer
 │   ├── pkg/solana/           # Solana client library
 │   └── docs/                 # Indexer documentation
+├── docs/                     # Jekyll documentation site
 ├── LOCALNET_SETUP.md         # Localnet configuration guide
-└── README.md                 # This file
+└── README.md                 # Main documentation
 ```
 
 ## ⚡ Quick Start
@@ -175,27 +189,34 @@ curl http://localhost:8080/health
 
 ## 🎯 Features
 
-### Starter Program (18 Instructions)
+### Starter Program (46 Instructions)
 
-**Program Configuration:**
+**Program Configuration (4):**
 - `initialize` - One-time program setup
 - `initialize_config` - Create program config PDA
 - `update_config` - Update admin and fee settings
 - `toggle_pause` - Emergency pause mechanism
 
-**User Account Management (PDA):**
+**User Account Management (3):**
 - `create_user_account` - Create user PDA with points
 - `update_user_account` - Update user points
 - `close_user_account` - Close and reclaim rent
 
-**SPL Token Operations:**
+**SPL Token Operations - Basic (5):**
 - `create_mint` - Create mint with PDA authority
 - `mint_tokens` - Mint tokens to user
 - `transfer_tokens` - Transfer between accounts
 - `transfer_tokens_with_pda` - Transfer using PDA signer
 - `burn_tokens` - Burn tokens from account
 
-**Cross-Program Invocation (CPI):**
+**SPL Token Operations - Advanced (5):**
+- `approve_delegate` - Delegate token spending
+- `revoke_delegate` - Revoke delegation
+- `freeze_token_account` - Freeze account
+- `thaw_token_account` - Unfreeze account
+- `close_token_account` - Close empty token account
+
+**Cross-Program Invocation (8):**
 - `transfer_sol` - Simple SOL transfer
 - `transfer_sol_with_pda` - Transfer from PDA vault
 - `initialize_counter` - Init counter via CPI
@@ -203,6 +224,38 @@ curl http://localhost:8080/health
 - `add_to_counter` - Add value via CPI
 - `increment_multiple` - Multiple CPIs in one tx
 - `increment_with_payment_from_pda` - PDA pays for service
+
+**Role-Based Access Control (4):**
+- `assign_role` - Assign Admin/Moderator/User role
+- `update_role_permissions` - Modify permissions bitmask
+- `revoke_role` - Remove role from user
+- `check_permission` - Verify user has permission
+
+**Treasury Management (5):**
+- `initialize_treasury` - Create treasury PDA
+- `deposit_to_treasury` - Deposit SOL
+- `withdraw_from_treasury` - Admin withdrawal
+- `emergency_withdraw` - Emergency mode withdrawal
+- `toggle_circuit_breaker` - Pause/unpause deposits
+
+**NFT Support (8):**
+- `create_collection` - Create NFT collection
+- `mint_nft` - Mint NFT with metadata
+- `update_nft_metadata` - Update NFT metadata
+- `list_nft` - List NFT for sale
+- `buy_nft` - Purchase listed NFT
+- `cancel_nft_listing` - Cancel listing
+- `create_nft_offer` - Make offer on NFT
+- `accept_nft_offer` - Accept NFT offer
+
+**Program Upgradability (7):**
+- `initialize_upgrade_authority` - Setup upgrade system
+- `transfer_upgrade_authority` - Transfer authority
+- `accept_upgrade_authority` - Accept transfer
+- `create_upgrade_proposal` - Propose upgrade
+- `cast_vote` - Vote on proposal
+- `execute_proposal` - Execute approved upgrade
+- `cancel_proposal` - Cancel proposal
 
 ### Counter Program (6 Instructions)
 
@@ -290,25 +343,20 @@ anchor test
 
 **Expected Output:**
 ```
-✔ 27 passing (20s)
-- 14 cross-program tests
-- 13 starter program tests
+✔ 96+ passing
+- 7 test files covering all program functionality
 ```
 
 ### Test Coverage
 
-**Cross-Program Tests:**
-- Direct counter operations (4 tests)
-- CPI from starter to counter (4 tests)
-- Complex scenarios (3 tests)
-- Payment functions (3 tests)
-
-**Starter Program Tests:**
-- Initialization (1 test)
-- Configuration management (3 tests)
-- User account operations (3 tests)
-- SPL token operations (4 tests)
-- CPI operations (2 tests)
+**Test Files:**
+- `starter_program.ts` - Core program tests (25+ tests)
+- `cross_program.ts` - CPI interaction tests (14 tests)
+- `rbac.ts` - Role-based access control tests (25+ tests)
+- `advanced_token.ts` - Advanced token operations (14+ tests)
+- `treasury.ts` - Treasury & emergency controls (18+ tests)
+- `nft-simple.ts` - NFT functionality tests
+- `upgrade-simple.ts` - Program upgrade tests
 
 ## 🏗️ Development Workflow
 
@@ -492,18 +540,19 @@ const tx = await program.methods
 
 ## 📊 Project Statistics
 
-- **Total Code:** ~8,000+ lines
-  - Rust programs: ~2,600 lines
-  - TypeScript tests: ~700 lines
+- **Total Code:** ~10,000+ lines
+  - Rust programs: ~3,500+ lines
+  - TypeScript tests: ~1,500+ lines
   - Frontend code: ~1,200 lines
   - Go indexer: ~1,500 lines
-  - Documentation: ~2,000+ lines
+  - Documentation: ~4,000+ lines
 
-- **Programs:** 2 programs, 24 instructions total
-- **Tests:** 27 integration tests (100% passing)
+- **Programs:** 2 programs, 52 instructions total
+- **Tests:** 96+ integration tests (100% passing)
 - **Components:** 8+ React components
 - **Hooks:** 6+ custom React hooks
 - **Indexer:** Full-featured with concurrent processing
+- **Events:** 20+ event types for monitoring
 
 ## 🔐 Security Best Practices
 

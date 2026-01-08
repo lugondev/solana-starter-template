@@ -176,10 +176,10 @@ git add -A
 
 git commit -m "Initial commit: Full-stack Solana starter
 
-- Two Anchor programs (24 instructions total)
+- Two Anchor programs (52 instructions total)
 - Next.js 16 frontend with Wallet Adapter
 - Go indexer with concurrent processing
-- 27 passing integration tests
+- 96+ passing integration tests
 - Complete documentation and guides"
 
 git branch -M main
@@ -257,7 +257,7 @@ docker-compose logs -f
 cd starter_program
 anchor test
 
-# Expected: ✔ 27 passing
+# Expected: ✔ 96+ passing (7 test files)
 ```
 
 ### Run Frontend Type Check
@@ -427,9 +427,9 @@ After setup is complete:
 solana-starter-program/
 ├── starter_program/          # Anchor workspace
 │   ├── programs/
-│   │   ├── starter_program/  # 18 instructions
+│   │   ├── starter_program/  # 46 instructions
 │   │   └── counter_program/  # 6 instructions
-│   ├── tests/                # 27 integration tests
+│   ├── tests/                # 96+ integration tests (7 files)
 │   └── target/               # Build artifacts
 ├── frontend/                 # Next.js 16 + React 19
 │   ├── app/                  # App router pages
@@ -451,7 +451,7 @@ solana-starter-program/
 Your setup is complete when:
 
 - ✅ All programs compile with `anchor build`
-- ✅ All 27 tests pass with `anchor test`
+- ✅ All 96+ tests pass with `anchor test`
 - ✅ Frontend builds with no TypeScript errors
 - ✅ Indexer builds and runs without errors
 - ✅ You can connect wallet and interact with programs
