@@ -539,4 +539,4 @@ describe("Treasury", () => {
 
 ---
 
-**Next:** [NFT Implementation](11-nft.md) →
+**Next:** [NFT Implementation]({% link examples/11-nft.md %}) →

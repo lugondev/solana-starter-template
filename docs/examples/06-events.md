@@ -483,4 +483,4 @@ for (let event of events) {
 
 ---
 
-**Next:** [SPL Token Operations](07-spl-tokens.md) →
+**Next:** [SPL Token Operations]({% link examples/07-spl-tokens.md %}) →

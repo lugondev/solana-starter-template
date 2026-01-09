@@ -432,5 +432,5 @@ jobs:
 
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
 - [PostgreSQL Docker Image](https://hub.docker.com/_/postgres)
-- [Go Indexer README](go_indexer/README.md)
-- [Frontend README](frontend/README.md)
+- [Go Indexer README](../go_indexer/README.md)
+- [Frontend README](../frontend/README.md)

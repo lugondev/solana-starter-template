@@ -435,4 +435,4 @@ try {
 
 ---
 
-**Next:** [Error Handling](05-error-handling.md) →
+**Next:** [Error Handling]({% link examples/05-error-handling.md %}) →

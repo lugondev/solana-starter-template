@@ -733,8 +733,8 @@ func (idx *Indexer) handleUpdateUserAccount(ctx context.Context, tx Transaction,
 
 - **Solana RPC Docs:** https://docs.solana.com/api/http
 - **Anchor IDL Format:** https://www.anchor-lang.com/docs/idl
-- **Go Indexer README:** [go_indexer/README.md](go_indexer/README.md)
-- **Program Documentation:** [starter_program/README.md](starter_program/README.md)
+- **Go Indexer README:** [Go Indexer Documentation](../go_indexer/README.md)
+- **Program Documentation:** [Starter Program API](../starter_program/README.md)
 
 ---
 

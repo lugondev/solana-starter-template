@@ -514,4 +514,4 @@ it("Should fail with InvalidAmount", async () => {
 
 ---
 
-**Next:** [Events](06-events.md) →
+**Next:** [Events]({% link examples/06-events.md %}) →

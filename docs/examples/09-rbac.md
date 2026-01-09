@@ -504,4 +504,4 @@ describe("RBAC Tests", () => {
 
 ---
 
-**Next:** [Treasury Management](10-treasury.md) →
+**Next:** [Treasury Management]({% link examples/10-treasury.md %}) →

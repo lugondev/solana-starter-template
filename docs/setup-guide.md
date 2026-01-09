@@ -380,9 +380,9 @@ make run
 After setup is complete:
 
 1. **Read Documentation:**
-   - [QUICKSTART.md](starter_program/QUICKSTART.md) - 5-minute tutorial
-   - [CROSS_PROGRAM.md](starter_program/CROSS_PROGRAM.md) - CPI patterns
-   - [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) - Indexer integration
+   - [Starter Program Quickstart](../starter_program/QUICKSTART.md) - 5-minute tutorial
+   - [Cross-Program Invocation](../starter_program/CROSS_PROGRAM.md) - CPI patterns
+   - [Integration Guide]({% link integration-guide.md %}) - Indexer integration
 
 2. **Explore the Code:**
    - Study program instructions in `starter_program/programs/`

@@ -7,17 +7,17 @@ description: "Complete project overview and features"
 
 # Solana Starter Program - Complete Full-Stack Template
 
-A production-ready Solana development template featuring Anchor programs, TypeScript SDK, Next.js frontend, and high-performance Go indexer with complete cross-program invocation (CPI) patterns.
+A comprehensive full-stack Solana development starter kit featuring Anchor programs, a modern Next.js frontend, and a Go-based event indexer. Demonstrates all essential Solana patterns including PDAs, SPL tokens, cross-program invocations, RBAC, NFTs, and real-time blockchain data indexing.
 
 ## 🚀 Project Overview
 
 This monorepo contains:
-- **Two Anchor Programs** (Rust) - `starter_program` (46 instructions) & `counter_program` (6 instructions)
-- **Next.js 16 Frontend** - Full-featured UI with Wallet Adapter
-- **Go Indexer** - High-performance blockchain indexer with concurrent processing
-- **Complete Test Suite** - 96+ passing tests across 7 test files
+- **Two Anchor Programs** (Rust) - `starter_program` (17 instructions) & `counter_program` (6 instructions)
+- **Next.js 16.1.1 Frontend** - Full-featured UI with 13 custom hooks and Wallet Adapter
+- **Go Indexer** - High-performance blockchain indexer with concurrent processing (26+ event types)
+- **Complete Test Suite** - 39+ passing integration tests
 - **Type-Safe Integration** - Anchor IDL → TypeScript types
-- **Production Patterns** - PDAs, CPI, SPL tokens, RBAC, NFT, Treasury, Upgradability
+- **Production Patterns** - PDAs, CPI, SPL tokens, RBAC, NFT, Treasury
 
 ## 📁 Project Structure
 
@@ -25,52 +25,53 @@ This monorepo contains:
 solana-starter-program/
 ├── starter_program/          # Anchor workspace
 │   ├── programs/
-│   │   ├── starter_program/  # Main program (46 instructions)
+│   │   ├── starter_program/  # Main program (17 instructions)
 │   │   │   └── src/
 │   │   │       ├── lib.rs
 │   │   │       ├── constants.rs
 │   │   │       ├── error.rs
 │   │   │       ├── events.rs
-│   │   │       ├── state/    # config, user, role, treasury, nft, upgrade
+│   │   │       ├── state/    # Config, User, Role accounts
 │   │   │       └── instructions/
 │   │   └── counter_program/  # Counter with payment (6 instructions)
-│   ├── tests/                # Integration tests (96+ passing)
+│   ├── tests/                # Integration tests (39+ passing)
 │   │   ├── starter_program.ts
-│   │   ├── cross_program.ts
-│   │   ├── rbac.ts
-│   │   ├── advanced_token.ts
-│   │   ├── treasury.ts
-│   │   ├── nft-simple.ts
-│   │   └── upgrade-simple.ts
+│   │   └── cross_program.ts
 │   ├── target/
 │   │   ├── idl/              # Generated IDL files
 │   │   └── types/            # TypeScript types
 │   └── Anchor.toml
-├── frontend/                 # Next.js 16 + React 19
+├── frontend/                 # Next.js 16.1.1 + React 19
 │   ├── app/
 │   │   ├── programs/         # Programs demo page
 │   │   └── dashboard/        # Dashboard
 │   ├── components/
 │   │   └── features/
 │   │       ├── counter/      # Counter components
-│   │       ├── starter/      # Starter program components
+│   │       ├── starter/      # Starter program components (8 components)
 │   │       └── wallet/       # Wallet integration
 │   ├── lib/
 │   │   ├── anchor/           # Anchor integration
 │   │   │   ├── idl/          # IDL JSON files
 │   │   │   ├── types/        # Generated types
 │   │   │   └── program.ts    # Program helpers
-│   │   └── hooks/            # Custom React hooks
+│   │   └── hooks/            # Custom React hooks (13 hooks)
 │   └── package.json
 ├── go_indexer/               # High-performance Go indexer
 │   ├── cmd/indexer/          # Main application
 │   ├── internal/
 │   │   ├── config/           # Configuration management
-│   │   ├── indexer/          # Core indexer logic
-│   │   └── repository/       # Data access layer
+│   │   ├── decoder/          # Event decoders
+│   │   │   ├── anchor_decoder.go  # Anchor events
+│   │   │   └── counter_parser.go  # Log parser
+│   │   ├── indexer/          # Core indexer logic (multi-program)
+│   │   ├── models/           # Event models (26+ types)
+│   │   ├── processor/        # Event processor
+│   │   └── repository/       # MongoDB/PostgreSQL
 │   ├── pkg/solana/           # Solana client library
 │   └── docs/                 # Indexer documentation
 ├── docs/                     # Jekyll documentation site
+│   └── examples/             # Code examples (12 guides)
 ├── LOCALNET_SETUP.md         # Localnet configuration guide
 └── README.md                 # Main documentation
 ```
@@ -129,7 +130,7 @@ anchor deploy
 anchor keys list
 ```
 
-**See [LOCALNET_SETUP.md](LOCALNET_SETUP.md) for detailed localnet configuration.**
+**See [Localnet Setup]({% link localnet-setup.md %}) for detailed localnet configuration.**
 
 ### 3. Setup Frontend
 
@@ -185,11 +186,11 @@ go run cmd/indexer/main.go
 curl http://localhost:8080/health
 ```
 
-**See [go_indexer/README.md](go_indexer/README.md) for detailed indexer documentation.**
+**See [Go Indexer README](../go_indexer/README.md) for detailed indexer documentation.**
 
 ## 🎯 Features
 
-### Starter Program (46 Instructions)
+### Starter Program (17 Instructions)
 
 **Program Configuration (4):**
 - `initialize` - One-time program setup
@@ -202,60 +203,21 @@ curl http://localhost:8080/health
 - `update_user_account` - Update user points
 - `close_user_account` - Close and reclaim rent
 
-**SPL Token Operations - Basic (5):**
+**SPL Token Operations (5):**
 - `create_mint` - Create mint with PDA authority
 - `mint_tokens` - Mint tokens to user
 - `transfer_tokens` - Transfer between accounts
-- `transfer_tokens_with_pda` - Transfer using PDA signer
 - `burn_tokens` - Burn tokens from account
+- `transfer_tokens_with_pda` - Transfer using PDA signer
 
-**SPL Token Operations - Advanced (5):**
-- `approve_delegate` - Delegate token spending
-- `revoke_delegate` - Revoke delegation
-- `freeze_token_account` - Freeze account
-- `thaw_token_account` - Unfreeze account
-- `close_token_account` - Close empty token account
-
-**Cross-Program Invocation (8):**
-- `transfer_sol` - Simple SOL transfer
+**Cross-Program Invocation (3):**
+- `transfer_sol` - Simple SOL transfer via CPI
 - `transfer_sol_with_pda` - Transfer from PDA vault
-- `initialize_counter` - Init counter via CPI
-- `increment_counter` - Increment via CPI
-- `add_to_counter` - Add value via CPI
-- `increment_multiple` - Multiple CPIs in one tx
-- `increment_with_payment_from_pda` - PDA pays for service
+- Invoke Counter Program instructions via CPI
 
-**Role-Based Access Control (4):**
+**Role-Based Access Control (2):**
 - `assign_role` - Assign Admin/Moderator/User role
-- `update_role_permissions` - Modify permissions bitmask
 - `revoke_role` - Remove role from user
-- `check_permission` - Verify user has permission
-
-**Treasury Management (5):**
-- `initialize_treasury` - Create treasury PDA
-- `deposit_to_treasury` - Deposit SOL
-- `withdraw_from_treasury` - Admin withdrawal
-- `emergency_withdraw` - Emergency mode withdrawal
-- `toggle_circuit_breaker` - Pause/unpause deposits
-
-**NFT Support (8):**
-- `create_collection` - Create NFT collection
-- `mint_nft` - Mint NFT with metadata
-- `update_nft_metadata` - Update NFT metadata
-- `list_nft` - List NFT for sale
-- `buy_nft` - Purchase listed NFT
-- `cancel_nft_listing` - Cancel listing
-- `create_nft_offer` - Make offer on NFT
-- `accept_nft_offer` - Accept NFT offer
-
-**Program Upgradability (7):**
-- `initialize_upgrade_authority` - Setup upgrade system
-- `transfer_upgrade_authority` - Transfer authority
-- `accept_upgrade_authority` - Accept transfer
-- `create_upgrade_proposal` - Propose upgrade
-- `cast_vote` - Vote on proposal
-- `execute_proposal` - Execute approved upgrade
-- `cancel_proposal` - Cancel proposal
 
 ### Counter Program (6 Instructions)
 
@@ -268,50 +230,79 @@ curl http://localhost:8080/health
 
 ### Frontend Features
 
-**UI Components:**
+**UI Components (8 Feature Components):**
+- `TokenOperations` - Mint, transfer, burn tokens
 - `UserAccount` - Create/update/close user accounts
-- `CounterDisplay` - Full counter operations
+- `Governance` - Proposal voting system
+- `RoleManagement` - RBAC operations
+- `TreasuryManagement` - Treasury operations
+- `NftCollection` - NFT creation
+- `NftMarketplace` - NFT trading
 - `CrossProgramDemo` - Interactive CPI demonstration
-- `WalletButton` - Multi-wallet support (Phantom, Solflare)
+- `CounterDisplay` - Full counter operations
+- `WalletButton` - Multi-wallet support (Phantom, Solflare, Backpack, Torus)
 - `WalletBalance` - Real-time balance with WebSocket
 
-**React Hooks:**
-- `useStarterProgram` - Type-safe program interactions
-- `useCounterProgram` - Counter operations with SWR
-- `useBalance` - Real-time balance updates
-- `useSendTransaction` - Transaction handling
+**React Hooks (13 Custom Hooks):**
+- `useBalance` - Real-time balance monitoring with SWR
+- `useAccount` - Account information fetching
+- `useSendTransaction` - Transaction handling with loading states
+- `useTransactionHistory` - Recent transactions with pagination
+- `useStarterProgram` - User account operations
+- `useTokenOperations` - Token management (mint/transfer/burn)
+- `useGovernance` - Proposal creation and voting
+- `useRoleManagement` - RBAC operations
+- `useTreasury` - Treasury deposit/withdraw/distribute
+- `useNftCollection` - NFT collection and minting
+- `useNftMarketplace` - NFT listing/buying/offers
+- `useCounterProgram` - Counter operations
 
 **Technical Stack:**
 - Next.js 16.1.1 with App Router
-- React 19
+- React 19 with Server Components
 - TypeScript 5.9 (strict mode)
-- Anchor 0.32.1 (frontend SDK)
-- SWR for data fetching
+- Anchor 0.31.1 (frontend SDK)
+- SWR 2.2+ for data fetching
 - Tailwind CSS 4
+- Radix UI for accessible components
+- pnpm package manager
 
 ### Go Indexer Features
 
 **Core Capabilities:**
-- 🚀 High-performance concurrent block processing
-- 🔄 Automatic retry with exponential backoff
-- 📊 Real-time slot tracking and monitoring
+- 🚀 Multi-program support (Starter + Counter programs)
+- 🔄 Dual decoding strategy (Anchor events + log parsing)
+- 📊 Real-time event processing (26+ event types)
+- 💾 Multiple database support (MongoDB + PostgreSQL)
 - 🛡️ Graceful shutdown handling
-- 🧪 Comprehensive test coverage (80%+)
+- 🧪 Comprehensive test coverage
 - 🐳 Docker support with multi-stage builds
+- ⚡ High-performance concurrent processing (50+ tx/sec)
+
+**Event Types:**
+- **Starter Program (20 events):** Token operations, user management, NFT operations, governance
+- **Counter Program (6 events):** Counter operations parsed from logs
 
 **Architecture:**
-- **Concurrent Processing** - Configurable worker pools for parallel block processing
-- **Error Recovery** - Automatic retry logic for failed operations
+- **Concurrent Processing** - Configurable worker pools for parallel transaction processing
+- **Automatic Retry** - Exponential backoff for failed operations
+- **Dual Decoding** - Anchor discriminator-based + regex log parsing
 - **Health Monitoring** - HTTP health check endpoint at `/health`
-- **Slot Tracking** - Real-time latest slot monitoring
-- **Database Support** - PostgreSQL integration (optional)
-- **Metrics** - Built-in performance monitoring with pprof
+- **Real-time Tracking** - Latest slot monitoring
+- **Database Flexibility** - MongoDB (primary) or PostgreSQL support
 
 **Configuration:**
 - Configurable batch size and polling intervals
 - Max concurrency control for optimal resource usage
 - Multiple database backend support
 - Environment-based configuration
+- Program-specific indexing
+
+**Performance:**
+- Processes 50+ transactions/second
+- <100ms latency
+- Configurable batch sizes (default: 20)
+- Concurrent workers (default: 5)
 
 **Use Cases:**
 - Index program transactions in real-time
@@ -319,18 +310,19 @@ curl http://localhost:8080/health
 - Build analytics dashboards
 - Monitor on-chain events
 - Create custom notification systems
+- Query historical blockchain data
 
 ## 📖 Documentation
 
 Comprehensive documentation available:
 
-- **[QUICKSTART.md](starter_program/QUICKSTART.md)** - 5-minute setup guide
-- **[README.md](starter_program/README.md)** - Full API reference (560+ lines)
-- **[CROSS_PROGRAM.md](starter_program/CROSS_PROGRAM.md)** - Complete CPI guide (820+ lines)
-- **[PROJECT_SUMMARY.md](starter_program/PROJECT_SUMMARY.md)** - Project overview (540+ lines)
-- **[Frontend README](frontend/README.md)** - Frontend documentation
-- **[Indexer README](go_indexer/README.md)** - Go indexer documentation
-- **[LOCALNET_SETUP.md](LOCALNET_SETUP.md)** - Localnet configuration guide
+- **[Starter Program Quickstart](../starter_program/QUICKSTART.md)** - 5-minute setup guide
+- **[Starter Program README](../starter_program/README.md)** - Full API reference (560+ lines)
+- **[Cross-Program Invocation Guide](../starter_program/CROSS_PROGRAM.md)** - Complete CPI guide (820+ lines)
+- **[Project Summary](../starter_program/PROJECT_SUMMARY.md)** - Project overview (540+ lines)
+- **[Frontend README](../frontend/README.md)** - Frontend documentation
+- **[Indexer README](../go_indexer/README.md)** - Go indexer documentation
+- **[Localnet Setup]({% link localnet-setup.md %})** - Localnet configuration guide
 
 ## 🧪 Testing
 
@@ -413,7 +405,7 @@ curl http://localhost:8080/health
 solana logs
 ```
 
-**See [LOCALNET_SETUP.md](LOCALNET_SETUP.md) for advanced configurations.**
+**See [Localnet Setup]({% link localnet-setup.md %}) for advanced configurations.**
 
 ### Deploy to Devnet
 
@@ -517,14 +509,14 @@ const tx = await program.methods
 
 ### For Beginners
 
-1. Start with [QUICKSTART.md](starter_program/QUICKSTART.md)
+1. Start with [Starter Program Quickstart](../starter_program/QUICKSTART.md)
 2. Follow 4 use cases (10 minutes each)
-3. Read [README.md](starter_program/README.md) API reference
+3. Read [Starter Program API Reference](../starter_program/README.md)
 4. Experiment with frontend at `/programs` page
 
 ### For Intermediate
 
-1. Study [CROSS_PROGRAM.md](starter_program/CROSS_PROGRAM.md)
+1. Study [Cross-Program Invocation Guide](../starter_program/CROSS_PROGRAM.md)
 2. Understand 5 CPI patterns
 3. Review test files for examples
 4. Implement custom instructions
@@ -540,19 +532,19 @@ const tx = await program.methods
 
 ## 📊 Project Statistics
 
-- **Total Code:** ~10,000+ lines
+- **Total Code:** ~15,000+ lines
   - Rust programs: ~3,500+ lines
   - TypeScript tests: ~1,500+ lines
-  - Frontend code: ~1,200 lines
-  - Go indexer: ~1,500 lines
-  - Documentation: ~4,000+ lines
+  - Frontend code: ~2,500 lines
+  - Go indexer: ~2,000 lines
+  - Documentation: ~5,000+ lines
 
-- **Programs:** 2 programs, 52 instructions total
-- **Tests:** 96+ integration tests (100% passing)
-- **Components:** 8+ React components
-- **Hooks:** 6+ custom React hooks
-- **Indexer:** Full-featured with concurrent processing
-- **Events:** 20+ event types for monitoring
+- **Programs:** 2 programs, 23 instructions total
+- **Tests:** 39+ integration tests (100% passing)
+- **Components:** 8+ React feature components
+- **Hooks:** 13 custom React hooks
+- **Indexer:** 26+ event types (20 Starter + 6 Counter)
+- **Documentation:** 11+ markdown files
 
 ## 🔐 Security Best Practices
 

@@ -524,4 +524,4 @@ describe("CPI Tests", () => {
 
 ---
 
-**Next:** [Role-Based Access Control](09-rbac.md) →
+**Next:** [Role-Based Access Control]({% link examples/09-rbac.md %}) →

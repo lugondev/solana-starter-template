@@ -310,4 +310,4 @@ require!(
 
 ---
 
-**Next:** [PDA (Program Derived Address)](03-pda.md) →
+**Next:** [PDA (Program Derived Address)]({% link examples/03-pda.md %}) →

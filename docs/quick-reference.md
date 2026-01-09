@@ -157,38 +157,60 @@ solana config set --url mainnet-beta
 
 ### Program Instructions
 
-**starter_program (46 total):**
+**starter_program (17 total):**
 - Config (4): initialize, initialize_config, update_config, toggle_pause
 - Users (3): create_user_account, update_user_account, close_user_account  
-- Tokens Basic (5): create_mint, mint_tokens, transfer_tokens, transfer_tokens_with_pda, burn_tokens
-- Tokens Advanced (5): approve_delegate, revoke_delegate, freeze_token_account, thaw_token_account, close_token_account
-- CPI (8): transfer_sol, transfer_sol_with_pda, initialize_counter, increment_counter, add_to_counter, increment_multiple, increment_with_payment_from_pda
-- RBAC (4): assign_role, update_role_permissions, revoke_role, check_permission
-- Treasury (5): initialize_treasury, deposit_to_treasury, withdraw_from_treasury, emergency_withdraw, toggle_circuit_breaker
-- NFT (8): create_collection, mint_nft, update_nft_metadata, list_nft, buy_nft, cancel_nft_listing, create_nft_offer, accept_nft_offer
-- Upgrade (7): initialize_upgrade_authority, transfer_upgrade_authority, accept_upgrade_authority, create_upgrade_proposal, cast_vote, execute_proposal, cancel_proposal
+- Tokens (5): create_mint, mint_tokens, transfer_tokens, transfer_tokens_with_pda, burn_tokens
+- CPI (3): transfer_sol, transfer_sol_with_pda, + invoke counter
+- RBAC (2): assign_role, revoke_role
 
 **counter_program (6 total):**
 - initialize, increment, decrement, add, reset, increment_with_payment
+
+### Frontend Hooks (13 total)
+
+**Wallet Hooks (4):**
+- useBalance, useAccount, useSendTransaction, useTransactionHistory
+
+**Starter Program Hooks (7):**
+- useStarterProgram, useTokenOperations, useGovernance, useRoleManagement
+- useTreasury, useNftCollection, useNftMarketplace
+
+**Counter Hook (1):**
+- useCounterProgram
+
+### Go Indexer Events (26 total)
+
+**Starter Program (20):**
+- Token events (8): TokensMintedEvent, TokensTransferredEvent, TokensBurnedEvent, etc.
+- User events (3): UserAccountCreatedEvent, UserAccountUpdatedEvent, UserAccountClosedEvent
+- Config events (2): ConfigUpdatedEvent, ProgramPausedEvent
+- NFT events (7): NftCollectionCreatedEvent, NftMintedEvent, NftListedEvent, NftSoldEvent, etc.
+
+**Counter Program (6):**
+- CounterInitializedEvent, CounterIncrementedEvent, CounterDecrementedEvent
+- CounterAddedEvent, CounterResetEvent, CounterPaymentReceivedEvent
 
 ### Testing Matrix
 
 | Test Type | Command | Expected |
 |-----------|---------|----------|
-| Unit | (none) | N/A |
-| Integration | `anchor test` | 96+ passing |
+| Integration | `anchor test` | 39+ passing |
 | TypeScript | `pnpm run type-check` | No errors |
+| Go Indexer | `go test ./...` | All pass |
 | Full Stack | `./test-full-stack.sh` | All ✓ |
 
 ### Metrics Summary
 
-- **Programs:** 2 programs, 52 instructions
-- **Tests:** 96+ integration tests (100% pass)
-- **Code:** ~10,000+ lines total
-- **Docs:** ~4,000+ lines across 11 files
-- **Components:** 8+ React components
-- **Hooks:** 6+ custom hooks
-- **Events:** 20+ event types
+- **Programs:** 2 programs, 23 instructions
+- **Tests:** 39+ integration tests (100% pass)
+- **Code:** ~15,000+ lines total
+- **Docs:** ~5,000+ lines across 11+ files
+- **Components:** 8 React feature components
+- **Hooks:** 13 custom React hooks
+- **Events:** 26+ event types (indexer)
+- **Frontend:** Next.js 16.1.1 + React 19
+- **Indexer:** Go 1.24+ with MongoDB/PostgreSQL
 
 ### Help Resources
 

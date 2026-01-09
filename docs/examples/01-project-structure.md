@@ -248,4 +248,4 @@ programs/starter_program/src/
 
 ---
 
-**Next:** [Account State Design](02-account-state.md) →
+**Next:** [Account State Design]({% link examples/02-account-state.md %}) →

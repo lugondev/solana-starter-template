@@ -259,7 +259,9 @@ git branch -M main
 chmod +x test-full-stack.sh
 ```
 
-### 3. First Time Setup (Follow SETUP_GUIDE.md)
+### 3. First Time Setup
+
+Follow the [Setup Guide]({% link setup-guide.md %}) for detailed instructions:
 - Install prerequisites if not already installed
 - Configure environment variables
 - Deploy programs to localnet
@@ -428,15 +430,15 @@ open http://localhost:3000
 ## 🔗 Quick Links
 
 ### Documentation
-- [Setup Guide](SETUP_GUIDE.md) - First-time setup
-- [Integration Guide](INTEGRATION_GUIDE.md) - Indexer integration
-- [Docker Guide](DOCKER_DEPLOYMENT.md) - Docker deployment
-- [Localnet Guide](LOCALNET_SETUP.md) - Local development
+- [Setup Guide]({% link setup-guide.md %}) - First-time setup
+- [Integration Guide]({% link integration-guide.md %}) - Indexer integration
+- [Docker Deployment]({% link docker-deployment.md %}) - Docker deployment
+- [Localnet Setup]({% link localnet-setup.md %}) - Local development
 
-### Code Examples
-- [Program API](starter_program/README.md) - All instructions
-- [CPI Patterns](starter_program/CROSS_PROGRAM.md) - Cross-program calls
-- [Quick Start](starter_program/QUICKSTART.md) - 5-minute tutorial
+### Component Documentation
+- [Program API](../starter_program/README.md) - All instructions
+- [CPI Patterns](../starter_program/CROSS_PROGRAM.md) - Cross-program calls
+- [Quick Start](../starter_program/QUICKSTART.md) - 5-minute tutorial
 
 ### Testing
 - Run Tests: `cd starter_program && anchor test`

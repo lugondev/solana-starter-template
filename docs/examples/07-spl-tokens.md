@@ -527,4 +527,4 @@ pub fn swap_tokens_handler(
 
 ---
 
-**Next:** [Cross-Program Invocation (CPI)](08-cpi.md) →
+**Next:** [Cross-Program Invocation (CPI)]({% link examples/08-cpi.md %}) →

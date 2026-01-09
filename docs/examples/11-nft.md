@@ -583,4 +583,4 @@ await program.methods
 
 ---
 
-**Next:** [Testing Patterns](12-testing.md) →
+**Next:** [Testing Patterns]({% link examples/12-testing.md %}) →

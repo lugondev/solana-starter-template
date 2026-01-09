@@ -392,4 +392,4 @@ require_keys_eq!(
 
 ---
 
-**Next:** [Account Constraints](04-constraints.md) →
+**Next:** [Account Constraints]({% link examples/04-constraints.md %}) →

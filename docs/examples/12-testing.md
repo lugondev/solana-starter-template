@@ -579,4 +579,4 @@ anchor test --skip-build
 
 **🎉 You've completed the Solana by Example guide!**
 
-Return to [Overview](../overview.md) for more resources.
+Return to [Overview]({% link overview.md %}) for more resources.

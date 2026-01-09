@@ -31,7 +31,7 @@ We recommend reading these sections in order:
 
 ### Fundamentals
 
-1. [**Project Structure**](01-project-structure.md) - Anchor project layout and organization
+1. [**Project Structure**]({% link examples/01-project-structure.md %}) - Anchor project layout and organization
 2. [**Account State Design**](02-account-state.md) - Defining on-chain data structures
 3. [**PDA (Program Derived Address)**](03-pda.md) - Creating and using PDAs
 4. [**Account Constraints**](04-constraints.md) - Validating accounts with Anchor
@@ -84,7 +84,7 @@ Before diving in, you should have:
 - Anchor framework installed (v0.31.1)
 - Understanding of blockchain fundamentals
 
-See [Setup Guide](../setup-guide.md) for installation instructions.
+See [Setup Guide]({% link setup-guide.md %}) for installation instructions.
 
 ---
 
@@ -108,4 +108,4 @@ See [Setup Guide](../setup-guide.md) for installation instructions.
 
 ---
 
-**Ready to start?** Begin with [Project Structure](01-project-structure.md) →
+**Ready to start?** Begin with [Project Structure]({% link examples/01-project-structure.md %}) →
