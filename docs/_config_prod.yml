@@ -2,12 +2,6 @@
 # This file is merged with _config.yml when deploying to GitHub Pages
 # Usage: jekyll build --config _config.yml,_config_prod.yml
 
-# Override local theme with remote_theme for GitHub Pages
-remote_theme: just-the-docs/just-the-docs@v0.7.0
-
-# Remove local theme setting (remote_theme takes precedence)
-theme: null
-
 # Additional plugins required for GitHub Pages
 plugins:
   - jekyll-seo-tag
