@@ -1,5 +1,6 @@
 title: Solana Starter Program
 description: A production-ready Solana development template featuring Anchor programs, TypeScript SDK, Next.js frontend, and high-performance Go indexer.
+repository: lugondev/solana-starter-program
 remote_theme: just-the-docs/just-the-docs@v0.7.0
 
 # logo: "/assets/images/logo.png"
